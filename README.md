@@ -27,7 +27,7 @@ Sistem Web Premium & Modern untuk Klasterisasi Pengelolaan Persediaan Obat Rumah
 ## 🚀 Cara Menjalankan Aplikasi
 
 1. Clone repositori ini:
-git clone https://github.com/username/kmeans-stok-obat.git
+https://github.com/yyusronwirawan/kmeans-stok-obat.git
 Import database:
 
 Buka folder database/
