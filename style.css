@@ -1,0 +1,206 @@
+/* === RESET DASAR === */
+body {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background: linear-gradient(120deg, #f8f9ff, #eef1fb);
+}
+
+/* === KONTAINER === */
+.container1 { background-color: #fff; }
+.container2 { background-color: #9D0000; }
+.container3 { background-color: #f7f7f7; }
+.container4 { background-color: #fff; }
+.container5 { background-color: #fdfdfd; }
+
+.grid {
+	width: 100%;
+	padding: 20px 0;
+	overflow: hidden;
+}
+
+/* === SISTEM GRID === */
+.dh1 { width: 6.25%; }
+.dh2 { width: 14.58%; }
+.dh3 { width: 22.91%; }
+.dh4 { width: 31.25%; }
+.dh5 { width: 39.58%; }
+.dh6 { width: 47.91%; }
+.dh7 { width: 56.25%; }
+.dh8 { width: 64.58%; }
+.dh9 { width: 72.91%; }
+.dh10 { width: 81.25%; }
+.dh11 { width: 89.58%; }
+.dh12 { width: 97.91%; }
+
+.dh1, .dh2, .dh3, .dh4, .dh5, .dh6, .dh7, .dh8, .dh9, .dh10, .dh11, .dh12 {
+	float: left;
+	display: inline;
+	margin: 0 1.04%;
+	box-sizing: border-box;
+}
+
+/* === RESPONSIF GRID === */
+@media screen and (max-width: 720px) {
+	.dh1, .dh2, .dh3, .dh4, .dh5, .dh6, .dh7, .dh8, .dh9, .dh10, .dh11, .dh12 {
+		width: 97.91%;
+		margin-bottom: 1em;
+	}
+}
+
+/* === LOGIN FORM === */
+#login {
+	max-width: 360px;
+	margin: 60px auto;
+	background: #fff;
+	box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+	border-radius: 12px;
+	overflow: hidden;
+	padding: 20px;
+}
+#login h3 {
+	text-align: center;
+	color: #9D0000;
+	font-size: 24px;
+	padding-bottom: 15px;
+}
+
+/* === FORM STYLE === */
+input[type="text"],
+input[type="password"],
+input[type="file"],
+select, textarea {
+	width: 94%;
+	padding: 12px;
+	margin-top: 1em;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	background-color: #f4f4f4;
+	color: #333;
+	transition: all 0.3s ease;
+}
+input:focus,
+select:focus,
+textarea:focus {
+	background-color: #fff;
+	border-color: #9D0000;
+	outline: none;
+}
+
+/* === SUBMIT BUTTON === */
+input[type="submit"] {
+	width: 100%;
+	margin-top: 1em;
+	color: #fff;
+	background: linear-gradient(90deg, #9D0000, #b30000);
+	padding: 12px;
+	border: none;
+	border-radius: 999px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+input[type="submit"]:hover {
+	background: linear-gradient(90deg, #b30000, #9D0000);
+}
+
+/* === TABEL === */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #fff;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+	border-radius: 10px;
+	overflow: hidden;
+}
+th {
+	background: linear-gradient(to right, #9D0000, #b30000);
+	color: #fff;
+	font-weight: bold;
+	padding: 12px;
+	text-align: center;
+}
+td {
+	padding: 12px;
+	background-color: #f9f9f9;
+	color: #333;
+}
+tr:hover td {
+	background-color: #f1f1f1;
+}
+
+/* === LINK === */
+a {
+	color: #9D0000;
+	text-decoration: none;
+	transition: 0.3s;
+}
+a:hover {
+	color: #333;
+}
+
+/* === BUTTON UMUM === */
+.btn {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 16px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 999px;
+	border: none;
+	transition: all 0.3s ease;
+}
+
+/* === TOMBOL UTAMA === */
+.btn-more {
+	color: #fff;
+	background: linear-gradient(135deg, #9D0000, #c40000);
+	box-shadow: 0 4px 10px rgba(157,0,0,0.3);
+}
+.btn-more:hover {
+	background: linear-gradient(135deg, #c40000, #9D0000);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 14px rgba(157,0,0,0.4);
+}
+
+/* === MENU NAVIGASI === */
+ul#menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background: linear-gradient(to right, #9D0000, #b30000);
+	height: 50px;
+	display: flex;
+	align-items: center;
+}
+ul#menu li {
+	display: inline-block;
+}
+ul#menu li a {
+	display: block;
+	color: #fff;
+	padding: 14px 20px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: 0.3s;
+}
+ul#menu li a:hover {
+	background: #333;
+}
+
+/* === FORM TAMBAHAN === */
+#formadd, #prd {
+	max-width: 90%;
+	margin: 20px auto;
+	background-color: #fff;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+	border-radius: 10px;
+	padding: 20px;
+}
+fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
