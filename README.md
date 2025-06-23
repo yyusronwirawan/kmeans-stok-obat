@@ -59,8 +59,6 @@ Email: yusronwirawan@yahoo.com
 📃 Lisensi
 Proyek ini dilisensikan di bawah MIT License – silakan lihat file LICENSE untuk informasi lebih lanjut.
 
-Terima kasih telah menggunakan sistem ini! 🙏
-
 ![iClimate System](./Gambar1.png)
 ![iClimate System](./Gambar2.png)
 ![iClimate System](./Gambar3.png)
