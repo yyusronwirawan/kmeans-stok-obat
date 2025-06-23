@@ -1,6 +1,6 @@
 ﻿# 💊 K-Means Clustering untuk Manajemen Stok Obat 📦
 
-Sistem Web Premium & Modern untuk Klasterisasi Pengelolaan Persediaan Obat Rumah Sakit/Apotek menggunakan **Algoritma K-Means**. Dengan akurasi hingga **98,21%**, sistem ini mampu melakukan **klasterisasi stok obat secara presisi dan konsisten** untuk mendukung pengambilan keputusan yang tepat dan efisien. 🚀
+Sistem Web Premium & Modern untuk Klasterisasi Pengelolaan Persediaan Obat Rumah Sakit/Apotek menggunakan **Algoritma K-Means**. Dengan akurasi hingga **98,21%**, sistem ini mampu melakukan **klasterisasi stok obat secara presisi dan konsisten** untuk mendukung pengambilan keputusan yang tepat. 🚀
 
 ---
 
@@ -21,25 +21,6 @@ Sistem Web Premium & Modern untuk Klasterisasi Pengelolaan Persediaan Obat Rumah
 - **Frontend**: HTML5, CSS3, JavaScript (jQuery, Chart.js)
 - **Database**: MySQL
 - **Library Clustering**: K-Means Custom Algorithm (tanpa framework)
-
----
-
-## 📂 Struktur Folder
-
-├── index.php
-├── proses_kmeans.php
-├── koneksi.php
-├── data/
-│ ├── data_obat.csv
-├── assets/
-│ ├── css/
-│ ├── js/
-│ └── img/
-├── views/
-│ ├── dashboard.php
-│ ├── hasil_klaster.php
-│ └── form_input.php
-└── README.md
 
 ---
 
@@ -73,9 +54,7 @@ Kami terbuka untuk kontribusi! Jika kamu ingin membantu mengembangkan fitur atau
 📧 Kontak
 Jika kamu memiliki pertanyaan atau saran, silakan hubungi:
 
-Email: yourname@email.com
-
-LinkedIn: LinkedIn Kamu
+Email: yusronwirawan@yahoo.com
 
 📃 Lisensi
 Proyek ini dilisensikan di bawah MIT License – silakan lihat file LICENSE untuk informasi lebih lanjut.
