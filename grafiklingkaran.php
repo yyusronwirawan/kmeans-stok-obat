@@ -11,6 +11,9 @@ $data_points = array();
 // Inisialisasi array untuk menyimpan warna setiap data
 $data_colors = array();
 
+// Inisialisasi array untuk cluster labels
+$cluster_labels = array();
+
 // Mengambil data dari database untuk ditampilkan pada grafik
 $q = mysql_query("SELECT * FROM data1 ORDER BY id ASC");
 while ($r = mysql_fetch_array($q)) {
@@ -58,6 +61,40 @@ while ($r = mysql_fetch_array($q)) {
 
     // Menyimpan warna data ke dalam array
     $data_colors[] = $color;
+}
+
+// Fungsi untuk menghitung persentase yang tepat totalnya 100%
+function calculatePercentages($counts) {
+    $total = array_sum($counts);
+    $percentages = array();
+    $rounded_percentages = array();
+    $remainder = 0;
+    
+    // Hitung persentase dan bulatkan ke bawah
+    foreach ($counts as $count) {
+        $exact_percentage = ($count / $total) * 100;
+        $rounded = floor($exact_percentage);
+        $percentages[] = $exact_percentage;
+        $rounded_percentages[] = $rounded;
+        $remainder += ($exact_percentage - $rounded);
+    }
+    
+    // Distribusikan sisa pembulatan ke item dengan remainder terbesar
+    $remainder = round($remainder);
+    if ($remainder > 0) {
+        $differences = array();
+        foreach ($percentages as $i => $exact) {
+            $differences[$i] = $exact - $rounded_percentages[$i];
+        }
+        arsort($differences);
+        
+        $keys_to_increment = array_slice(array_keys($differences), 0, $remainder);
+        foreach ($keys_to_increment as $key) {
+            $rounded_percentages[$key]++;
+        }
+    }
+    
+    return $rounded_percentages;
 }
 ?>
 
@@ -232,11 +269,11 @@ while ($r = mysql_fetch_array($q)) {
             </div>
         </div>
     </div>
-     <script>
-        const labels = <?= json_encode(array_unique($cluster_labels)) ?>;
-        const dataColors = <?= json_encode($data_colors) ?>;
+    
+    <script>
         const clusterLabels = <?= json_encode($cluster_labels) ?>;
 
+        // Hitung jumlah data per cluster
         const counts = {};
         clusterLabels.forEach(label => {
             counts[label] = (counts[label] || 0) + 1;
@@ -244,6 +281,32 @@ while ($r = mysql_fetch_array($q)) {
 
         const chartLabels = Object.keys(counts);
         const chartData = Object.values(counts);
+        
+        // Fungsi untuk menghitung persentase yang tepat totalnya 100%
+        function calculatePercentages(counts) {
+            const total = counts.reduce((a, b) => a + b, 0);
+            const percentages = counts.map(count => (count / total) * 100);
+            const rounded = percentages.map(p => Math.floor(p));
+            
+            // Hitung sisa pembulatan
+            let remainder = Math.round(percentages.reduce((sum, p, i) => sum + (p - rounded[i]), 0));
+            
+            // Distribusikan sisa ke item dengan decimal terbesar
+            if (remainder > 0) {
+                const differences = percentages.map((p, i) => ({ index: i, diff: p - rounded[i] }));
+                differences.sort((a, b) => b.diff - a.diff);
+                
+                for (let i = 0; i < remainder && i < differences.length; i++) {
+                    rounded[differences[i].index]++;
+                }
+            }
+            
+            return rounded;
+        }
+
+        // Hitung persentase yang benar
+        const correctPercentages = calculatePercentages(chartData);
+        
         const backgroundColor = chartLabels.map(label => {
             if (label === 'C1') return '#ef4444';
             if (label === 'C2') return '#3b82f6';
@@ -256,9 +319,8 @@ while ($r = mysql_fetch_array($q)) {
             type: 'pie',
             data: {
                 labels: chartLabels.map((label, index) => {
-                    const total = chartData.reduce((a, b) => a + b, 0);
                     const count = chartData[index];
-                    const percent = Math.round((count / total) * 100);
+                    const percent = correctPercentages[index];
                     return `${label} - ${count} data (${percent}%)`;
                 }),
                 datasets: [{
@@ -289,8 +351,7 @@ while ($r = mysql_fetch_array($q)) {
                             weight: 'bold'
                         },
                         formatter: (value, context) => {
-                            const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                            return Math.round((value / total) * 100) + '%';
+                            return correctPercentages[context.dataIndex] + '%';
                         },
                         textStrokeColor: 'rgba(0,0,0,0.5)',
                         textStrokeWidth: 1
@@ -305,9 +366,8 @@ while ($r = mysql_fetch_array($q)) {
                         callbacks: {
                             label: function(context) {
                                 const value = context.raw;
-                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percent = Math.round((value / total) * 100);
-                                return `${context.label} (${percent}%)`;
+                                const percent = correctPercentages[context.dataIndex];
+                                return `${context.label.split(' - ')[0]}: ${value} data (${percent}%)`;
                             }
                         }
                     }
@@ -320,6 +380,10 @@ while ($r = mysql_fetch_array($q)) {
             },
             plugins: [ChartDataLabels]
         });
+        
+        // Debugging: tampilkan total persentase di console
+        console.log('Total Persentase:', correctPercentages.reduce((a, b) => a + b, 0));
+        console.log('Detail Persentase:', correctPercentages);
     </script>
 </body>
 </html>
